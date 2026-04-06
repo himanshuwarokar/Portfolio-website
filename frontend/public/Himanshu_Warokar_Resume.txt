@@ -1,0 +1,9 @@
+Himanshu Warokar
+Full Stack Web Developer
+
+Summary
+- Bachelor's student majoring in Information Technology at Nagpur Institute of Technology.
+- Skilled in HTML, CSS, JavaScript, MongoDB, Express, React, Node.js, and DSA in Java.
+
+Note
+- Replace this placeholder resume text file with your final resume PDF when ready.
