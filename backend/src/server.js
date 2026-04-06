@@ -63,6 +63,14 @@ app.use(
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.get("/", (_req, res) => {
+  res.json({
+    status: "ok",
+    service: "portfolio-backend",
+    message: "API is running. Use /api/health, /api/profile, /api/projects, /api/messages"
+  });
+});
+
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", service: "portfolio-backend" });
 });
