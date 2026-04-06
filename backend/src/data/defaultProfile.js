@@ -8,7 +8,7 @@ export const defaultProfile = {
   email: "warokarhimanshu12@gmail.com",
   github: "https://github.com/himanshuwarokar",
   linkedin: "https://www.linkedin.com/in/himanshu-warokar-a279502ba",
-  resumeUrl: "/Himanshu_Warokar_Resume.txt",
+  resumeUrl: "/Himanshu_Warokar_Resume.pdf",
   skills: [
     "Java",
     "DSA",

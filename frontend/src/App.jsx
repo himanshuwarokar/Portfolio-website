@@ -77,8 +77,8 @@ const technologyProjectMap = {
   },
   {
     title: "Personal Portfolio",
-    imageUrl: "https://images.unsplash.com/photo-1634084462412-b54873c0a56d?q=80&w=1460&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    url: "https://github.com/yourname/portfolio"
+    imageUrl: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    url: "https://portfolio-website-five-xi-55.vercel.app/"
   },
   {
     title: "Youth Skill Gap Analyzer",
@@ -285,7 +285,13 @@ function App() {
       "i build clean, scalable web apps using mongodb, express, react, and node.js."
       ? profile.heroDescription
       : defaultHeroDescription;
-  const resumeUrl = profile?.resumeUrl?.trim() || "/Himanshu_Warokar_Resume.txt";
+  const defaultResumeUrl = "/Himanshu_Warokar_Resume.pdf";
+  const configuredResumeUrl = profile?.resumeUrl?.trim() || "";
+  const resumeUrl =
+    !configuredResumeUrl || configuredResumeUrl.toLowerCase().endsWith(".txt")
+      ? defaultResumeUrl
+      : configuredResumeUrl;
+  const resumeDownloadName = "Himanshu_Warokar_Resume.pdf";
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
@@ -333,7 +339,12 @@ function App() {
           <a className="nav-link" href="#projects" onClick={handleNavLinkClick}>
             Projects
           </a>
-          <a className="nav-link" href={resumeUrl} download onClick={handleNavLinkClick}>
+          <a
+            className="nav-link"
+            href={resumeUrl}
+            download={resumeDownloadName}
+            onClick={handleNavLinkClick}
+          >
             Resume
           </a>
           <a className="nav-link" href="#contact" onClick={handleNavLinkClick}>
@@ -376,7 +387,11 @@ function App() {
                   {profile.email}
                 </a>
               ) : null}
-              <a className="btn btn-secondary btn-with-icon" href={resumeUrl} download>
+              <a
+                className="btn btn-secondary btn-with-icon"
+                href={resumeUrl}
+                download={resumeDownloadName}
+              >
                 <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path
                     d="M12 3v11m0 0l4-4m-4 4l-4-4M5 17v2h14v-2"
