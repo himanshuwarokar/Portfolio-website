@@ -54,3 +54,20 @@ Frontend runs at `http://localhost:5173`.
 
 - If backend is unavailable, frontend shows fallback demo project data.
 - Make sure MongoDB is running before starting backend.
+
+## Render + Vercel Deployment
+
+Set these environment variables before deploying:
+
+- Render (backend):
+  - `MONGODB_URI=<your mongo uri>`
+  - `CLIENT_URL=https://<your-vercel-domain>.vercel.app`
+  - You can set multiple allowed frontend origins with commas:
+  - `CLIENT_URL=https://<prod>.vercel.app,https://<preview>.vercel.app`
+- Vercel (frontend):
+  - `VITE_API_URL=https://<your-render-service>.onrender.com/api`
+
+Important:
+
+- Vite reads env variables at build time, so after changing `VITE_API_URL` you must redeploy frontend.
+- If `CLIENT_URL` is wrong or missing, browser requests will fail with CORS errors.
