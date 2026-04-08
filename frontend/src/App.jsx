@@ -294,6 +294,12 @@ function App() {
       ? defaultResumeUrl
       : configuredResumeUrl;
   const resumeDownloadName = "Himanshu_Warokar_Resume.pdf";
+  const defaultGithubUrl = "https://github.com/himanshuwarokar";
+  const defaultLinkedinUrl = "https://www.linkedin.com/in/himanshu-warokar-a279502ba";
+  const defaultEmailAddress = "warokarhimanshu12@gmail.com";
+  const githubUrl = profile?.github?.trim() || defaultGithubUrl;
+  const linkedinUrl = profile?.linkedin?.trim() || defaultLinkedinUrl;
+  const emailAddress = profile?.email?.trim() || defaultEmailAddress;
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
@@ -374,21 +380,15 @@ function App() {
             </span>
             <p>{heroDescription}</p>
             <div className="hero-actions">
-              {profile?.github ? (
-                <a className="btn btn-secondary" href={profile.github} target="_blank" rel="noreferrer">
-                  GitHub
-                </a>
-              ) : null}
-              {profile?.linkedin ? (
-                <a className="btn btn-secondary" href={profile.linkedin} target="_blank" rel="noreferrer">
-                  LinkedIn
-                </a>
-              ) : null}
-              {profile?.email ? (
-                <a className="btn btn-outline" href={`mailto:${profile.email}`}>
-                  {profile.email}
-                </a>
-              ) : null}
+              <a className="btn btn-secondary" href={githubUrl} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a className="btn btn-secondary" href={linkedinUrl} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a className="btn btn-outline" href={`mailto:${emailAddress}`}>
+                {emailAddress}
+              </a>
               <a
                 className="btn btn-secondary btn-with-icon"
                 href={resumeUrl}
