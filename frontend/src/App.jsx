@@ -197,7 +197,7 @@ const technologyButtons = ["MERN Stack", "React", "JavaScript", "HTML", "CSS", "
 
 function App() {
   const [profile, setProfile] = useState(null);
-  const [pageState, setPageState] = useState({ loading: true, error: "" });
+  const [pageState, setPageState] = useState({ loading: false, error: "" });
   const [photoMissing, setPhotoMissing] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedTechnology, setSelectedTechnology] = useState(technologyButtons[0]);
@@ -206,25 +206,38 @@ function App() {
   const heroTitle = "Full Stack Web Developer";
 
   useEffect(() => {
+    let isMounted = true;
+
     const loadData = async () => {
-      setPageState({ loading: true, error: "" });
+      setPageState((current) => ({ ...current, loading: true, error: "" }));
       try {
         const profileData = await getProfile();
+        if (!isMounted) {
+          return;
+        }
         setProfile(profileData);
       } catch (error) {
-        setPageState({
+        if (!isMounted) {
+          return;
+        }
+        setPageState((current) => ({
+          ...current,
           loading: false,
           error:
             error.response?.data?.message ||
             "Backend is not reachable. Showing profile demo data until backend starts."
-        });
+        }));
         return;
       }
 
-      setPageState({ loading: false, error: "" });
+      setPageState((current) => ({ ...current, loading: false, error: "" }));
     };
 
     loadData();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useLayoutEffect(() => {
@@ -255,17 +268,6 @@ function App() {
   const skillSplitIndex = Math.ceil(skillRatings.length / 2);
   const leftSkillRatings = skillRatings.slice(0, skillSplitIndex);
   const rightSkillRatings = skillRatings.slice(skillSplitIndex);
-
-  if (pageState.loading) {
-    return (
-      <main className="loading-screen">
-        <section className="loader-card">
-          <p className="eyebrow">Preparing Portfolio</p>
-          <h2>Loading your content...</h2>
-        </section>
-      </main>
-    );
-  }
 
   const displayName =
     profile?.fullName?.trim() && profile.fullName.trim().toLowerCase() !== "your name"
@@ -405,6 +407,7 @@ function App() {
                 Resume
               </a>
             </div>
+            {pageState.loading ? <p className="status info">Syncing live profile data...</p> : null}
             {pageState.error ? <p className="status error">{pageState.error}</p> : null}
           </div>
 

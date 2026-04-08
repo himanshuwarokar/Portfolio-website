@@ -952,6 +952,10 @@ textarea {
   color: #1f6d48;
 }
 
+.status.info {
+  color: #1f5f55;
+}
+
 .empty-state {
   margin: 0;
   padding: 1rem;
